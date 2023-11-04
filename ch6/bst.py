@@ -84,8 +84,24 @@ class BTN():
         else:
             return self.lchild.min()
 
+    def min_node(self):
+        if (self.lchild is None):
+            return self
+        else:
+            return self.lchild.min_node()
+
     def __getitem__(self, key):
         return self.find(key)
+
+    # Transplant replace subtree U with subtree V
+    # p is
+    def transplant(self, u, v, up, vp):
+        if (up.lchild is not None) and u.key == up.lchild.key:
+            up.lchild = v
+        else:
+            up.rchild = v
+        if v is not None:
+            vp = up
 
     def __delitem__(self, key):
         parent = self
@@ -107,11 +123,6 @@ class BTN():
                 else:
                     return  # Value no exist
 
-        # Either the sibling or the
-        print(parent.key, n.key)
-
-        print(f"successor is left? {isl}")
-
         if (n.lchild is None):
             if (isl):
                 parent.lchild = n.rchild
@@ -123,9 +134,20 @@ class BTN():
             else:
                 parent.rchild = n.lchild
         else:
-            # Two children oh no
-            #TODO do the thing
-            pass
+            # Successor
+            y = n.rchild
+            yp = n
+            while (y.lchild is not None):
+                yp = y
+                y = yp.lchild
+
+            # n is not y's parent
+            if y.key not in [n.lchild.key, n.rchild.key]:
+                self.transplant(y, y.rchild, yp, y)
+                y.rchild = n.rchild
+
+            self.transplant(n, y, parent, yp)
+            y.lchild = n.lchild
 
 
 bst = BTN(70)
@@ -133,12 +155,13 @@ bst[14] = "hi"
 bst[91] = None
 bst[95] = None
 bst[93] = None
-bst[92] = None
+bst[92] = 'aa'
 bst[94] = None
 
 bst[100] = "max!"
 
 print(bst[14])
+print(bst[92])
 
 bst[14] = "bye"
 bst.print()
@@ -153,3 +176,20 @@ print(bst.max())
 
 del bst[95]
 bst.print()
+
+# bst = BTN(17)
+# # bst[25] = None
+# bst[35] = None
+# bst[29] = None
+# bst[38] = None
+# bst[5] = None
+# bst[2] = None
+# bst[11] = None
+# bst[9] = None
+# bst[7] = None
+# bst[8] = None
+# bst[16] = None
+
+# del bst[5]
+
+# bst.print()
