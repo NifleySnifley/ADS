@@ -1,3 +1,7 @@
+import random
+import graphviz
+
+
 class BTN():
 
     def __init__(self, key=None, value=None):
@@ -10,8 +14,13 @@ class BTN():
         print("\t" * d, self.key, "->", self.value)
         if (self.lchild is not None):
             self.lchild.print(d + 1)
+        else:
+            print("\t" * (d+1), "NONE")
+
         if (self.rchild is not None):
             self.rchild.print(d + 1)
+        else:
+            print("\t" * (d+1), "NONE")
 
     def insert(self, node):
         val = node.key
@@ -149,6 +158,20 @@ class BTN():
             self.transplant(n, y, parent, yp)
             y.lchild = n.lchild
 
+    def show_grapviz(self, name):
+        t = graphviz.Digraph("Binary Search Tree")
+        self.add_graphviz(t)
+        t.render(f"{name}.dot", format="png")
+
+    def add_graphviz(self, graph: graphviz.Digraph):
+        graph.node(str(self.key), f"{self.key}")
+        if (self.lchild is not None):
+            self.lchild.add_graphviz(graph)
+            graph.edge(str(self.key), str(self.lchild.key))
+        if (self.rchild is not None):
+            self.rchild.add_graphviz(graph)
+            graph.edge(str(self.key), str(self.rchild.key))
+
 
 bst = BTN(70)
 bst[14] = "hi"
@@ -193,3 +216,16 @@ bst.print()
 # del bst[5]
 
 # bst.print()
+
+tvis = BTN(68)
+for k in [88, 61, 89, 94, 50, 4, 76, 66, 82]:
+    tvis[k] = None
+
+tvis.show_grapviz("bst_e7")
+
+
+tvis = BTN(random.randint(-256, 256))
+for i in range(32):
+    tvis[random.randint(-256, 256)] = None
+
+tvis.show_grapviz("bst_e8")

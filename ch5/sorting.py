@@ -1,7 +1,9 @@
-import random, timeit
-
+import random
+import timeit
 
 # Bubblesort, in place
+
+
 def bbsort(arr):
     chg = True
     while (chg):
@@ -93,7 +95,7 @@ def quicksort(arr, a, b):
 # as opposed to the Hoare partition from the textbook
 def partition(arr, a, b):
     # For the original sort, pvi := r, for randomized qsort, this works
-    #pvi = random.randint(a, b)
+    # pvi = random.randint(a, b)
     # This implements the "median of three" partitioning method
     pvi = sorted([random.randint(a, b) for i in range(3)],
                  key=lambda i: arr[i])[1]

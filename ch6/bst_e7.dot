@@ -1,0 +1,21 @@
+digraph "Binary Search Tree" {
+	68 [label=68]
+	61 [label=61]
+	50 [label=50]
+	4 [label=4]
+	50 -> 4
+	61 -> 50
+	66 [label=66]
+	61 -> 66
+	68 -> 61
+	88 [label=88]
+	76 [label=76]
+	82 [label=82]
+	76 -> 82
+	88 -> 76
+	89 [label=89]
+	94 [label=94]
+	89 -> 94
+	88 -> 89
+	68 -> 88
+}
