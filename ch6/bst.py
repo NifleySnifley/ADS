@@ -1,5 +1,5 @@
-import random
 import graphviz
+import random
 
 
 class BTN():
@@ -15,12 +15,12 @@ class BTN():
         if (self.lchild is not None):
             self.lchild.print(d + 1)
         else:
-            print("\t" * (d+1), "NONE")
+            print("\t" * (d + 1), "NONE")
 
         if (self.rchild is not None):
             self.rchild.print(d + 1)
         else:
-            print("\t" * (d+1), "NONE")
+            print("\t" * (d + 1), "NONE")
 
     def insert(self, node):
         val = node.key
@@ -168,9 +168,15 @@ class BTN():
         if (self.lchild is not None):
             self.lchild.add_graphviz(graph)
             graph.edge(str(self.key), str(self.lchild.key))
+        else:
+            graph.node(f"{self.key}-L", "NULL")
+            graph.edge(str(self.key), f"{self.key}-L")
         if (self.rchild is not None):
             self.rchild.add_graphviz(graph)
             graph.edge(str(self.key), str(self.rchild.key))
+        else:
+            graph.node(f"{self.key}-R", "NULL")
+            graph.edge(str(self.key), f"{self.key}-R")
 
 
 bst = BTN(70)
@@ -222,7 +228,6 @@ for k in [88, 61, 89, 94, 50, 4, 76, 66, 82]:
     tvis[k] = None
 
 tvis.show_grapviz("bst_e7")
-
 
 tvis = BTN(random.randint(-256, 256))
 for i in range(32):

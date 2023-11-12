@@ -3,11 +3,16 @@
 
 class BHeap():
 
-    def __init__(self, items=None):
+    def __init__(self, items=None, cap=None):
         self.arr = ([] if items is None else items)
         if (len(self.arr) > 0):
             for i in range(len(self.arr) - 1, -1, -1):
                 self.heapify(i)
+
+        self.cap = cap
+
+    def __len__(self):
+        return len(self.arr)
 
     def parent(self, i):
         return (i - 1) // 2
@@ -21,6 +26,18 @@ class BHeap():
     def insert(self, v):
         self.arr.append(v)
         self.perc()
+        if self.cap is not None and len(self.arr) > self.cap:
+            # Only try to remove the last two nodes (final children?)
+            # TODO: Prove correctness, this is just based on intuition
+            if len(self.arr) >= 2:
+                if (self.arr[-1] > self.arr[-2]):
+                    self.arr.pop()
+                else:
+                    v = self.arr.pop()
+                    self.arr.pop()
+                    self.insert(v)
+            else:
+                self.arr.pop()
         # self.heapify()
 
     def perc(self):
@@ -54,6 +71,12 @@ class BHeap():
         return m
 
 
+# Exercises 2 #8
+def heapsort(l):
+    h = BHeap(l)
+    return [h.remove_min() for i in range(len(h))]
+
+
 h = BHeap()  #[3, 4, 5, 2, 1, 10])
 
 h.arr = [5, 9, 11, 14, 18, 19, 21, 33, 17, 27]
@@ -70,3 +93,19 @@ print(h.remove_min())
 # print(h.remove_min())
 
 print(h.arr)
+
+print("Heapsorting")
+print(heapsort([2, 1, 5, 7, 1, 2, 9, 4, 2, 6, 9]))
+
+print("Capacity")
+c = BHeap(cap=6)
+c.insert(2)
+c.insert(3)
+c.insert(13)
+c.insert(5)
+c.insert(9)
+c.insert(1)
+c.insert(20)
+c.insert(0)
+
+print(c.arr)

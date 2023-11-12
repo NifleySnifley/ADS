@@ -3,18 +3,40 @@ digraph "Binary Search Tree" {
 	61 [label=61]
 	50 [label=50]
 	4 [label=4]
+	"4-L" [label=NULL]
+	4 -> "4-L"
+	"4-R" [label=NULL]
+	4 -> "4-R"
 	50 -> 4
+	"50-R" [label=NULL]
+	50 -> "50-R"
 	61 -> 50
 	66 [label=66]
+	"66-L" [label=NULL]
+	66 -> "66-L"
+	"66-R" [label=NULL]
+	66 -> "66-R"
 	61 -> 66
 	68 -> 61
 	88 [label=88]
 	76 [label=76]
+	"76-L" [label=NULL]
+	76 -> "76-L"
 	82 [label=82]
+	"82-L" [label=NULL]
+	82 -> "82-L"
+	"82-R" [label=NULL]
+	82 -> "82-R"
 	76 -> 82
 	88 -> 76
 	89 [label=89]
+	"89-L" [label=NULL]
+	89 -> "89-L"
 	94 [label=94]
+	"94-L" [label=NULL]
+	94 -> "94-L"
+	"94-R" [label=NULL]
+	94 -> "94-R"
 	89 -> 94
 	88 -> 89
 	68 -> 88

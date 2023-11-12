@@ -2,6 +2,7 @@ from bst import BTN
 
 
 class AVLN(BTN):
+
     def __init__(self, key=None, value=None):
         self.value = value
         self.key = key
@@ -15,15 +16,16 @@ class AVLN(BTN):
         if (self.lchild is not None):
             self.lchild.print(d + 1)
         else:
-            print("\t" * (d+1), "NONE")
+            print("\t" * (d + 1), "NONE")
 
         if (self.rchild is not None):
             self.rchild.print(d + 1)
         else:
-            print("\t" * (d+1), "NONE")
+            print("\t" * (d + 1), "NONE")
 
 
 class AVLTree():
+
     def __init__(self):
         self.root = None
 
@@ -79,13 +81,9 @@ class AVLTree():
             else:
                 self.rot_r(node)
 
-    # def rot_r(self, node):
-    #     p = node.parent
-    #     nroot = node.lchild
-    #     rrc = nroot.rchild
-
-    #     nroot.rchild = node
-    #     node.lchild = rrc
+    def __delitem__(self, key):
+        # TODO: Delete using a copy of the BTN method but find which node needs to be rebalanced and correctly edit balfac-s
+        # Maybe abstract the delete method a bit more (successor method, etc.)
 
     def print(self):
         if self.root is not None:
