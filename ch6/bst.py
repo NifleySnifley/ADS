@@ -179,58 +179,59 @@ class BTN():
             graph.edge(str(self.key), f"{self.key}-R")
 
 
-bst = BTN(70)
-bst[14] = "hi"
-bst[91] = None
-bst[95] = None
-bst[93] = None
-bst[92] = 'aa'
-bst[94] = None
+if __name__ == "__main__":
+    bst = BTN(70)
+    bst[14] = "hi"
+    bst[91] = None
+    bst[95] = None
+    bst[93] = None
+    bst[92] = 'aa'
+    bst[94] = None
 
-bst[100] = "max!"
+    bst[100] = "max!"
 
-print(bst[14])
-print(bst[92])
+    print(bst[14])
+    print(bst[92])
 
-bst[14] = "bye"
-bst.print()
+    bst[14] = "bye"
+    bst.print()
 
-print(bst[14])
-print(list(bst.keys()))
-print(list(bst.values()))
-print(73 in bst)
-print(20 in bst)
+    print(bst[14])
+    print(list(bst.keys()))
+    print(list(bst.values()))
+    print(73 in bst)
+    print(20 in bst)
 
-print(bst.max())
+    print(bst.max())
 
-del bst[95]
-bst.print()
+    del bst[95]
+    bst.print()
 
-# bst = BTN(17)
-# # bst[25] = None
-# bst[35] = None
-# bst[29] = None
-# bst[38] = None
-# bst[5] = None
-# bst[2] = None
-# bst[11] = None
-# bst[9] = None
-# bst[7] = None
-# bst[8] = None
-# bst[16] = None
+    # bst = BTN(17)
+    # # bst[25] = None
+    # bst[35] = None
+    # bst[29] = None
+    # bst[38] = None
+    # bst[5] = None
+    # bst[2] = None
+    # bst[11] = None
+    # bst[9] = None
+    # bst[7] = None
+    # bst[8] = None
+    # bst[16] = None
 
-# del bst[5]
+    # del bst[5]
 
-# bst.print()
+    # bst.print()
 
-tvis = BTN(68)
-for k in [88, 61, 89, 94, 50, 4, 76, 66, 82]:
-    tvis[k] = None
+    tvis = BTN(68)
+    for k in [88, 61, 89, 94, 50, 4, 76, 66, 82]:
+        tvis[k] = None
 
-tvis.show_grapviz("bst_e7")
+    tvis.show_grapviz("bst_e7")
 
-tvis = BTN(random.randint(-256, 256))
-for i in range(32):
-    tvis[random.randint(-256, 256)] = None
+    tvis = BTN(random.randint(-256, 256))
+    for i in range(32):
+        tvis[random.randint(-256, 256)] = None
 
-tvis.show_grapviz("bst_e8")
+    tvis.show_grapviz("bst_e8")

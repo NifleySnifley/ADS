@@ -77,35 +77,36 @@ def heapsort(l):
     return [h.remove_min() for i in range(len(h))]
 
 
-h = BHeap()  #[3, 4, 5, 2, 1, 10])
+if __name__ == "__main__":
+    h = BHeap()  # [3, 4, 5, 2, 1, 10])
 
-h.arr = [5, 9, 11, 14, 18, 19, 21, 33, 17, 27]
+    h.arr = [5, 9, 11, 14, 18, 19, 21, 33, 17, 27]
 
-h.insert(7)
+    h.insert(7)
 
-print(h.arr)
+    print(h.arr)
 
-print(h.remove_min())
-print(h.remove_min())
-print(h.remove_min())
-print(h.remove_min())
-print(h.remove_min())
-# print(h.remove_min())
+    print(h.remove_min())
+    print(h.remove_min())
+    print(h.remove_min())
+    print(h.remove_min())
+    print(h.remove_min())
+    # print(h.remove_min())
 
-print(h.arr)
+    print(h.arr)
 
-print("Heapsorting")
-print(heapsort([2, 1, 5, 7, 1, 2, 9, 4, 2, 6, 9]))
+    print("Heapsorting")
+    print(heapsort([2, 1, 5, 7, 1, 2, 9, 4, 2, 6, 9]))
 
-print("Capacity")
-c = BHeap(cap=6)
-c.insert(2)
-c.insert(3)
-c.insert(13)
-c.insert(5)
-c.insert(9)
-c.insert(1)
-c.insert(20)
-c.insert(0)
+    print("Capacity")
+    c = BHeap(cap=6)
+    c.insert(2)
+    c.insert(3)
+    c.insert(13)
+    c.insert(5)
+    c.insert(9)
+    c.insert(1)
+    c.insert(20)
+    c.insert(0)
 
-print(c.arr)
+    print(c.arr)

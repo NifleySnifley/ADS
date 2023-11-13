@@ -84,6 +84,7 @@ class AVLTree():
     def __delitem__(self, key):
         # TODO: Delete using a copy of the BTN method but find which node needs to be rebalanced and correctly edit balfac-s
         # Maybe abstract the delete method a bit more (successor method, etc.)
+        pass
 
     def print(self):
         if self.root is not None:
@@ -132,13 +133,14 @@ class AVLTree():
         return None if (self.root is None) else self.root[key]
 
 
-t = AVLTree()
-t['a'] = None
-t['b'] = None
-t['c'] = None
-t['d'] = None
-t['e'] = None
-t['f'] = None
-t['g'] = None
+if __name__ == "__main__":
+    t = AVLTree()
+    t['a'] = None
+    t['b'] = None
+    t['c'] = None
+    t['d'] = None
+    t['e'] = None
+    t['f'] = None
+    t['g'] = None
 
-t.print()
+    t.print()
