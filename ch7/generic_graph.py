@@ -3,39 +3,70 @@ import tempfile
 import graphviz
 
 
-class Graph():
+class Graph:
+
     def __init__(self, directed=True):
         self.nodes = set()
-        self.edges = defaultdict(lambda: {})
+        self.edges = defaultdict(dict)
+        self.erevs = defaultdict(dict)
         self.dir = directed
 
     def add_node(self, n):
         self.nodes.add(n)
 
+    def get_edges(self):
+        return {(w, a, b) for a, u in self.edges.items() for b, w in u.items()}
+
     def connect(self, a, b, weight=None):
-        # if (a not in self.nodes) or (b not in self.nodes):
-        #     return
         self.edges[a][b] = weight
-        if not self.dir:
-            self.edges[b][a] = weight
+        self.erevs[b][a] = weight
 
     def get_neighbors(self, n):
-        return [v for v, w in self.edges[n]]
+        if self.dir:
+            return [v for v, w in self.edges[n].items()]
+        else:
+            return [v for v, w in self.edges[n].items()
+                    ] + [v for v, w in self.erevs[n].items()]
 
     def get_weight(self, fro, to):
-        return self.edges[fro][to] if (fro in self.edges and to in self.edges[fro]) else None
+        if self.dir:
+            return self.edges[fro][to] if (fro in self.edges
+                                           and to in self.edges[fro]) else None
+        else:
+            e1 = self.edges[fro][to] if (fro in self.edges
+                                         and to in self.edges[fro]) else None
+            e2 = self.erevs[fro][to] if (fro in self.erevs
+                                         and to in self.erevs[fro]) else None
+            return e2 if e1 is None else e1
 
-    def create_graphviz(self, outname):
-        g = graphviz.Digraph(outname, engine='neato')
+    def create_graphviz(self,
+                        outname,
+                        engine="neato",
+                        fname=None,
+                        fmt=None,
+                        view=True,
+                        gparams={},
+                        nparams=lambda n: {},
+                        eparams=lambda e: {}):
+        g: graphviz.Graph | graphviz.Digraph | None = None
+        if self.dir:
+            g = graphviz.Digraph(outname, engine=engine, graph_attr=gparams)
+        else:
+            g = graphviz.Graph(outname, engine=engine, graph_attr=gparams)
+            pass
+
         for n in self.nodes:
-            g.node(str(n))
+            g.node(str(n), **nparams(n))
         for src, dsts in self.edges.items():
             for dst, w in dsts.items():
-                g.edge(str(src), str(dst), label=str(
-                    w) if w is not None else None)
+                g.edge(str(src),
+                       str(dst),
+                       label=str(w) if w is not None else None,
+                       **eparams((src, dst, w)))
 
-        g.render(tempfile.mktemp('.gv'), format="svg", view=True)
-        # g.render("out.gv", format="png")
+        g.render(fname if fname is not None else tempfile.mktemp('.gv'),
+                 format="svg" if fmt is None else fmt,
+                 view=view)
 
     def __contains__(self, n):
         return n in self.nodes

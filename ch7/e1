@@ -1,0 +1,23 @@
+digraph "Exercise 1" {
+	B
+	F
+	D
+	C
+	E
+	A
+	A -> B [label=7]
+	A -> C [label=5]
+	A -> F [label=1]
+	B -> A [label=2]
+	B -> D [label=7]
+	B -> E [label=3]
+	C -> B [label=2]
+	C -> F [label=8]
+	D -> A [label=1]
+	D -> E [label=2]
+	D -> F [label=4]
+	E -> A [label=6]
+	E -> D [label=5]
+	F -> B [label=1]
+	F -> E [label=8]
+}
